@@ -20,8 +20,13 @@ class AsaasClient:
         self.base_url = ASAAS_BASE_URLS[ASAAS_ENV]
         self.api_key = ASAAS_API_KEY
 
-    def criar_autorizacao_pix_automatico(self, *args, **kwargs):
-        raise NotImplementedError
+    def criar_autorizacao_pix_automatico(self, participante, pagamentos):
+        """Cria a autorização de recorrência do Pix Automático na Asaas.
+
+        TODO: implementar a chamada real ao endpoint de Pix Automático (sandbox).
+        Por enquanto retorna None para não bloquear o cadastro local do participante.
+        """
+        return None
 
     def obter_qr_code_pix(self, *args, **kwargs):
         raise NotImplementedError
