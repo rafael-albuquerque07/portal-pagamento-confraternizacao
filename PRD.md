@@ -72,6 +72,7 @@ CREATE TABLE pagamento (
     status TEXT NOT NULL DEFAULT 'pendente',  -- pendente | pago | falhou
     asaas_payment_id TEXT,               -- id da cobrança na Asaas
     asaas_authorization_id TEXT,         -- id da autorização de recorrência
+    autorizacao_status TEXT,             -- CREATED | ACTIVE | REFUSED | CANCELLED | EXPIRED
     data_confirmacao TIMESTAMP,
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     UNIQUE(participante_id, mes_referencia)
