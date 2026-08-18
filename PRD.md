@@ -59,6 +59,7 @@ CREATE TABLE participante (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     nome TEXT NOT NULL,
     telefone TEXT,
+    cpf TEXT UNIQUE NOT NULL,           -- exigido pela Asaas para criar o Customer
     slug TEXT UNIQUE NOT NULL,          -- usado na URL individual do PWA
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
