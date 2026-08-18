@@ -40,10 +40,33 @@ def _vencimento_do_mes(mes_referencia: str) -> str:
     return date(ano, mes, DIA_VENCIMENTO_PADRAO).isoformat()
 
 
-@router.get("/dashboard")
-def obter_dashboard():
+def _mascarar_cpf(cpf: str) -> str:
+    """Mantém apenas os 3 primeiros e os 2 últimos dígitos do CPF visíveis."""
+    digitos = re.sub(r"\D", "", cpf)
+    if len(digitos) != 11:
+        return "***"
+    return f"{digitos[:3]}.***.***-{digitos[9:]}"
+
+
+@router.get("/dashboard", response_model=list[schemas.ParticipanteDashboardOut])
+def obter_dashboard(db: Session = Depends(get_db)):
     """Lista todos os participantes com o status de todas as parcelas."""
-    return {"status": "not implemented"}
+    participantes = db.query(models.Participante).order_by(models.Participante.nome).all()
+    return [
+        schemas.ParticipanteDashboardOut(
+            nome=participante.nome,
+            cpf_mascarado=_mascarar_cpf(participante.cpf),
+            parcelas=[
+                schemas.ParcelaDashboardOut(
+                    mes_referencia=pagamento.mes_referencia,
+                    status=pagamento.status,
+                    data_confirmacao=pagamento.data_confirmacao,
+                )
+                for pagamento in sorted(participante.pagamentos, key=lambda p: p.mes_referencia)
+            ],
+        )
+        for participante in participantes
+    ]
 
 
 @router.post(
