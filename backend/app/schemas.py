@@ -1,4 +1,6 @@
 """Modelos Pydantic (request/response)."""
+from datetime import datetime
+
 from pydantic import BaseModel, ConfigDict, Field
 
 
@@ -39,3 +41,15 @@ class AutorizacaoPixOut(BaseModel):
 class CadastroParticipanteResponse(BaseModel):
     participante: ParticipanteOut
     autorizacao_pix: AutorizacaoPixOut | None
+
+
+class ParcelaDashboardOut(BaseModel):
+    mes_referencia: str
+    status: str
+    data_confirmacao: datetime | None = None
+
+
+class ParticipanteDashboardOut(BaseModel):
+    nome: str
+    cpf_mascarado: str
+    parcelas: list[ParcelaDashboardOut]
