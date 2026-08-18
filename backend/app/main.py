@@ -5,7 +5,11 @@ from fastapi.middleware.cors import CORSMiddleware
 
 load_dotenv()
 
+from app import models  # noqa: E402,F401 — registra as tabelas em Base.metadata
+from app.database import Base, engine  # noqa: E402
 from app.routers import admin, participante, webhooks  # noqa: E402
+
+Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="Portal de Pagamentos — Confraternização")
 
