@@ -37,6 +37,10 @@ class Pagamento(Base):
     status: Mapped[str] = mapped_column(String, nullable=False, default="pendente")  # pendente | pago | falhou
     asaas_payment_id: Mapped[str | None] = mapped_column(String, nullable=True)
     asaas_authorization_id: Mapped[str | None] = mapped_column(String, nullable=True)
+    # status da autorização de recorrência do Pix Automático (mesma autorização
+    # é compartilhada pelas 4 parcelas do participante) — refletido pelos eventos
+    # PIX_AUTOMATIC_RECURRING_AUTHORIZATION_* recebidos em /webhooks/asaas
+    autorizacao_status: Mapped[str | None] = mapped_column(String, nullable=True)  # CREATED | ACTIVE | REFUSED | CANCELLED | EXPIRED
     data_confirmacao: Mapped[str | None] = mapped_column(TIMESTAMP, nullable=True)
     criado_em: Mapped[str] = mapped_column(TIMESTAMP, server_default=func.current_timestamp())
 
