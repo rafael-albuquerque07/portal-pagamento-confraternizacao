@@ -53,3 +53,14 @@ class ParticipanteDashboardOut(BaseModel):
     nome: str
     cpf_mascarado: str
     parcelas: list[ParcelaDashboardOut]
+
+
+class PagamentoParticipanteOut(BaseModel):
+    mes_referencia: str
+    valor_esperado: float
+    status: str
+
+
+class PixOut(BaseModel):
+    qr_code_base64: str
+    payload_copia_cola: str
