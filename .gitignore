@@ -1,0 +1,69 @@
+# ==========================
+# Backend (Python / FastAPI)
+# ==========================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Ambientes virtuais
+venv/
+env/
+.venv/
+ENV/
+
+# Variáveis de ambiente e segredos
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# Banco de dados local
+*.db
+*.sqlite
+*.sqlite3
+confraternizacao.db
+
+# Cache e build Python
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# ==========================
+# Frontend (Node / Vite / TS)
+# ==========================
+node_modules/
+dist/
+dist-ssr/
+.vite/
+*.local
+
+# Logs de npm/yarn/pnpm
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ==========================
+# Editores e Sistema Operacional
+# ==========================
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# ==========================
+# Diversos
+# ==========================
+*.log
+.cache/
+
+# Claude Code (configuração local, não compartilhada)
+.claude/settings.local.json
