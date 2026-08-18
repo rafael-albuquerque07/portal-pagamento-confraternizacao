@@ -19,6 +19,7 @@ class Participante(Base):
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
     nome: Mapped[str] = mapped_column(String, nullable=False)
     telefone: Mapped[str | None] = mapped_column(String, nullable=True)
+    cpf: Mapped[str] = mapped_column(String, unique=True, nullable=False)  # exigido pela Asaas para criar o Customer
     slug: Mapped[str] = mapped_column(String, unique=True, nullable=False)
     criado_em: Mapped[str] = mapped_column(TIMESTAMP, server_default=func.current_timestamp())
 

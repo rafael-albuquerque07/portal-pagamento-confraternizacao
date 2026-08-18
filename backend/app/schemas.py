@@ -4,6 +4,7 @@ from pydantic import BaseModel, ConfigDict, Field
 
 class ParticipanteCreate(BaseModel):
     nome: str = Field(min_length=1)
+    cpf: str = Field(min_length=11, max_length=14)  # aceita "00000000000" ou "000.000.000-00"
     telefone: str | None = None
 
 
@@ -21,6 +22,20 @@ class ParticipanteOut(BaseModel):
 
     id: int
     nome: str
+    cpf: str
     telefone: str | None
     slug: str
     pagamentos: list[PagamentoOut]
+
+
+class AutorizacaoPixOut(BaseModel):
+    """Dados retornados pela Asaas ao criar a autorização de Pix Automático."""
+
+    id: str | None
+    payload: str | None  # código copia-e-cola do Pix da 1ª parcela
+    conciliation_identifier: str | None
+
+
+class CadastroParticipanteResponse(BaseModel):
+    participante: ParticipanteOut
+    autorizacao_pix: AutorizacaoPixOut | None
